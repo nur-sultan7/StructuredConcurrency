@@ -21,6 +21,7 @@ class MainViewModel : ViewModel() {
         CoroutineScope(Dispatchers.Main + coroutineEH)
 
     fun start() {
+
         val childJob1 = coroutineScope.launch {
             coroutineScopeWithException.launch {
                 error()
