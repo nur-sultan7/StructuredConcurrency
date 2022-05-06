@@ -7,7 +7,7 @@ import java.lang.RuntimeException
 import kotlin.concurrent.thread
 
 class MainViewModel : ViewModel() {
-    private val parentJob = Job()
+    private val parentJob = SupervisorJob()
     private val coroutineEH = CoroutineExceptionHandler { _, throwable ->
         Log.d(LOG_TAG, "Exception is: $throwable")
     }
@@ -32,9 +32,12 @@ class MainViewModel : ViewModel() {
             delay(3000)
             Log.d(LOG_TAG, "childJob2 finished")
         }
-        val childJob3 = coroutineScope.launch {
-            delay(5000)
+        val childJob3 = coroutineScope.async {
+            delay(2500)
             error()
+        }
+        coroutineScope.launch {
+            childJob3.await()
         }
         thread {
             Thread.sleep(4500)
