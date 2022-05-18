@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        //  mainViewModel.start()
-        mainViewModel2.method()
+          mainViewModel.start()
+//        mainViewModel2.method()
     }
 }
